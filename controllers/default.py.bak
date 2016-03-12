@@ -16,7 +16,7 @@ def viewproducts():
     noOfPages = getNoOfPages(db(countQuery).count())
     rows = db(db.products).select(limitby=((request.args(0, cast=int) * 2) - 2, request.args(0, cast=int) * 2))
     pageIncrement = getPageIncrement(0)
-    remainder = getPageRemainder(noOfPages, pageIncrement)
+    remainder = getPageRemainder(noOfPages, pageIncrement, 0)
     return locals()
 
 def getNoOfPages(noOfRecords):
@@ -35,9 +35,9 @@ def getPageIncrement(argPos):
     else:
         return  1
 
-def getPageRemainder(noOfPages, pageIncrement):
+def getPageRemainder(noOfPages, pageIncrement, argPos):
     lastIncrement = noOfPages - noOfPages % 5
-    if request.args(1, cast=int) >= lastIncrement:
+    if request.args(argPos, cast=int) >= lastIncrement:
         return pageIncrement + noOfPages % 5
 
     else:
@@ -78,7 +78,7 @@ def product():
     noOfPages = getNoOfPages(db(countQuery).count())
     rows = db((db.blog_post.product==request.args(0)) & (db.auth_user.id == db.blog_post.user_id)).select(limitby=((request.args(1, cast=int) * 2) - 2, request.args(1, cast=int) * 2))
     pageIncrement = getPageIncrement(1)
-    remainder = getPageRemainder(noOfPages, pageIncrement)
+    remainder = getPageRemainder(noOfPages, pageIncrement, 1)
     postcount='0'
     return locals()
 
