@@ -1,0 +1,32 @@
+{{extend 'plugin_layouts/layouts/Industrial.html'}}
+<style>
+.product_img{
+    height:80px;
+    width:80px;
+}
+</style>
+<h1>View Products</h1>
+
+<table class="table">
+    <tr>
+        <td><b>Product Name</b></td>
+        <td><b>Image</b></td>
+        <td><b>Category</b></td>
+        <td><b>Description</b></td>
+        <td><b>Price</b></td>
+        <td><b>Stock</b></td>
+    </tr>
+    {{for row in rows:}}
+    <tr>
+        <td><a href="{{=URL('product',args=[row.id, 1])}}">{{=row.name}}</a></td>
+        <td><img class="product_img" style="height:150px;width:150px;" src="{{=URL('download',args=row.image)}}"/></td>
+        <td>{{=row.category}}</td>
+        <td>{{=row.description}}</td>
+        <td>£{{=row.price}}</td>
+        <td>{{=row.stock}}</td>
+    </tr>
+    {{pass}}
+</table>
+{{if request.args(1, cast=int) != 1: }}<a href="{{=URL('viewproducts', args=[request.args(0, cast=int) - 1, request.args(0, cast=int) - 1])}}">&lt;&lt;PREV</a>{{pass}}
+{{for i in xrange(pageIncrement, remainder):}}<a href="{{=URL('viewproducts', args=[i, i])}}">{{=i}}</a>{{pass}}
+{{if request.args(1, cast=int) != noOfPages:}}<a href="{{=URL('viewproducts', args=[request.args(0, cast=int) + 1, request.args(0, cast=int) + 1])}}">NEXT&gt;&gt;</a>{{pass}}

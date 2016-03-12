@@ -1,0 +1,4 @@
+{{extend 'plugin_layouts/layouts/Industrial.html'}}
+
+<h1>Manage Products</h1>
+{{=grid}}

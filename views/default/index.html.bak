@@ -1,0 +1,15 @@
+{{extend 'plugin_layouts/layouts/Industrial.html'}}
+
+<h1>
+    User Info
+</h1>
+
+<ul>
+    <li><b>Admin:</b> <br>email - admin@admins.net   <br>password - password</li>
+    <li><b>Normal User:</b> <br>email - user@users.net   <br>password - password</li>
+    <br><br><br>
+    <li><b>Ben:</b> <br>email - Sir-Amik-Vase@overclocked.net   <br>password - password</li>
+    <li><b>Will:</b> <br>email - will.knight96@hotmail.com   <br>password - password</li>
+    <li><b>Nathan:</b> <br>email - Nathan@Nathan.com   <br>password - password</li>
+    <li><b>Georgia:</b> <br>email - georgiaisaac@hotmail.co.uk   <br>password - password</li>
+</ul>

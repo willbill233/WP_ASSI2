@@ -1,0 +1,92 @@
+# -*- coding: utf-8 -*-
+# this file is released under public domain and you can use without limitations
+
+#########################################################################
+## This is a sample controller
+## - index is the default action of any application
+## - user is required for authentication and authorization
+## - download is for downloading files uploaded in the db (does streaming)
+#########################################################################
+
+def index():
+    return locals()
+
+def viewproducts():
+    rows = db(db.products).select()
+    return locals()
+
+def manageproducts():
+    grid = SQLFORM.grid(db.products)
+    return locals()
+
+def product():
+    #Can somebody paginate this shit please
+    post = db.products(request.args(0))
+    rows = db(db.blog_post.product==request.args(0)).select()
+    return locals()
+
+def addproduct():
+    form = SQLFORM(db.products).process()
+    if form.accepted: redirect(URL('viewproducts'))
+    return locals()
+
+@auth.requires_login()
+def create():
+    db.blog_post.time_stamp.default = request.now
+    db.blog_post.time_stamp.writable = False
+    db.blog_post.time_stamp.readable = False
+    db.blog_post.product.default = request.args(0)
+    db.blog_post.product.readable = False
+    db.blog_post.product.writable = False
+    #db.blog_post.product.requires = IS_IN_DB(db,db.products.id,'%(product)s') This should ensure that the args for product_id should be in the DB but this doesnt work sad face - Ben
+    form = SQLFORM(db.blog_post).process()
+    if form.accepted: redirect(URL('viewproducts'))
+    elif form.errors: response.flash = 'An error has occured.' #Can somebody find a way to test this? I cant generate any errors - Ben
+    return locals()
+
+def showreview():
+    post = db.blog_post(request.args(0,cast=int))
+    return locals()
+
+
+@auth.requires_membership('Manager')
+def management():
+    grid = SQLFORM.grid(db.blog_post)
+    return locals()
+
+def user():
+    """
+    exposes:
+    http://..../[app]/default/user/login
+    http://..../[app]/default/user/logout
+    http://..../[app]/default/user/register
+    http://..../[app]/default/user/profile
+    http://..../[app]/default/user/retrieve_password
+    http://..../[app]/default/user/change_password
+    http://..../[app]/default/user/bulk_register
+    use @auth.requires_login()
+        @auth.requires_membership('group name')
+        @auth.requires_permission('read','table name',record_id)
+    to decorate functions that need access control
+    also notice there is http://..../[app]/appadmin/manage/auth to allow administrator to manage users
+    """
+    return dict(form=auth())
+
+
+@cache.action()
+def download():
+    """
+    allows downloading of uploaded files
+    http://..../[app]/default/download/[filename]
+    """
+    return response.download(request, db)
+
+
+def call():
+    """
+    exposes services. for example:
+    http://..../[app]/default/call/jsonrpc
+    decorate with @services.jsonrpc the functions to expose
+    supports xml, json, xmlrpc, jsonrpc, amfrpc, rss, csv
+    """
+    return service()

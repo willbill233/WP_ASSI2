@@ -1,0 +1,11 @@
+{{extend 'plugin_layouts/layouts/Industrial.html'}}
+
+<h2>Previous Posts</h2>
+<table class="table">
+    {{for row in rows:}}
+    <tr>
+        <td><a href="{{=URL('showreview',args=row.id)}}">{{=row.title}}</a></td>
+        <td>{{=row.time_stamp}}</td>
+    </tr>
+    {{pass}}
+</table>

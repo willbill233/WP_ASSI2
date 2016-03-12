@@ -1,0 +1,4 @@
+{{extend 'plugin_layouts/layouts/Industrial.html'}}
+<h1>Add a review for cats</h1>
+<br>
+{{=BEAUTIFY(response._vars)}}
