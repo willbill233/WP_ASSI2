@@ -11,12 +11,23 @@
 def index():
     return locals()
 
+def hasRecords(tableCountQuery):
+    if db(tableCountQuery).count() > 0:
+        return True
+    else:
+        return False
+
 def viewproducts():
     countQuery = (db.products.id > 0)
     noOfPages = getNoOfPages(db(countQuery).count())
     rows = db(db.products).select(limitby=((request.args(0, cast=int) * 2) - 2, request.args(0, cast=int) * 2))
     pageIncrement = getPageIncrement(0)
     remainder = getPageRemainder(noOfPages, pageIncrement, 0)
+    
+    if hasRecords(countQuery):
+        showPagination = True
+    else:
+        showPagination = False
     return locals()
 
 def getNoOfPages(noOfRecords):
@@ -80,6 +91,11 @@ def product():
     pageIncrement = getPageIncrement(1)
     remainder = getPageRemainder(noOfPages, pageIncrement, 1)
     postcount='0'
+    
+    if hasRecords(countQuery):
+        showPagination = True
+    else:
+        showPagination = False
     return locals()
 
 def addproduct():

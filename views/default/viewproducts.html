@@ -27,6 +27,8 @@
     </tr>
     {{pass}}
 </table>
+{{if showPagination == True:}}
 {{if request.args(1, cast=int) != 1: }}<a href="{{=URL('viewproducts', args=[request.args(0, cast=int) - 1, request.args(0, cast=int) - 1])}}">&lt;&lt;PREV</a>{{pass}}
 {{for i in xrange(pageIncrement, remainder):}}<a href="{{=URL('viewproducts', args=[i, i])}}">{{=i}}</a>{{pass}}
 {{if request.args(1, cast=int) != noOfPages:}}<a href="{{=URL('viewproducts', args=[request.args(0, cast=int) + 1, request.args(0, cast=int) + 1])}}">NEXT&gt;&gt;</a>{{pass}}
+{{pass}}

@@ -41,9 +41,11 @@
 </div>
 <hr>
 {{pass}}
+{{if showPagination == True:}}
 {{if request.args(1, cast=int) != 1: }}<a href="{{=URL('product', args=[row.blog_post.product, request.args(1, cast=int) - 1])}}">&lt;&lt;PREV</a>{{pass}}
 {{for i in xrange(pageIncrement, remainder):}}<a href="{{=URL('product', args=[row.blog_post.product, i])}}">{{=i}}</a>{{pass}}
 {{if request.args(1, cast=int) != noOfPages:}}<a href="{{=URL('product', args=[row.blog_post.product, request.args(1, cast=int) + 1])}}">NEXT&gt;&gt;</a>{{pass}}
+{{pass}}
     <h3>
         Add a review
     </h3>
