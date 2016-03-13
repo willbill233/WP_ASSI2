@@ -94,20 +94,20 @@ p27
 (dp28
 S'sortable'
 p29
-I7
+L7L
 sS'sql'
 p30
 S'INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  '
 p31
 sS'length'
 p32
-I512
+L512L
 sS'notnull'
 p33
-I00
+L0L
 sS'unique'
 p34
-I00
+L0L
 sS'type'
 p35
 S'reference auth_user'
@@ -117,13 +117,18 @@ p37
 (dp38
 S'sortable'
 p39
+<<<<<<< HEAD
 I7
+=======
+L7L
+>>>>>>> 60c4a074fc2a55b4cfbe6a388c1b81bb9294b468
 sS'sql'
 p40
 S'CHAR(512)'
 p41
 sS'length'
 p42
+<<<<<<< HEAD
 I512
 sS'notnull'
 p43
@@ -131,6 +136,15 @@ I00
 sS'unique'
 p44
 I00
+=======
+L512L
+sS'notnull'
+p43
+L0L
+sS'unique'
+p44
+L0L
+>>>>>>> 60c4a074fc2a55b4cfbe6a388c1b81bb9294b468
 sS'type'
 p45
 S'upload'

@@ -128,14 +128,12 @@ img.right {
 	color: #D56E22;
 }
 
-.auth_navbar{
-    color: #666666; !important
-}
+
 
 /* Page */
 
 #page {
-	width: 880px;
+	<!--width: 880px;-->
 	margin: 0 auto;
 	padding: 30px 0;
 }

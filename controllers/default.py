@@ -9,6 +9,8 @@
 #########################################################################
 
 def index():
+    rows = db((db.auth_user.id == db.blog_post.user_id)).select(limitby=(0,4),orderby=~(db.blog_post.time_stamp))
+    postcount = 0
     return locals()
 
 def hasRecords(tableCountQuery):
@@ -83,7 +85,6 @@ def product():
             auth.user.postcount += 1
         elif form.errors: response.flash = 'An error has occured.' #Can somebody find a way to test this? I cant generate any errors - Ben
     else: form=auth.login()
-    #Somebody paginate this shit please
     post = db.products(request.args(0))
     countQuery = (db.blog_post.id > 0) & (db.blog_post.product==request.args(0))
     noOfPages = getNoOfPages(db(countQuery).count())

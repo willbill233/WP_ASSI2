@@ -57,8 +57,8 @@ div.error { background-color: red; color: white; padding: 3px; }
   <div id="page">
    <!-- start content -->
    <div id="content">
-    <!--<div class="flash">{{=response.flash or ''}}</div>
-    {{include}}-->
+    <div class="flash">{{=response.flash or ''}}</div>
+    {{include}}
    </div>
    <!-- end content -->
    <div style="clear: both;">
