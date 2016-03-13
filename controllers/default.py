@@ -9,6 +9,8 @@
 #########################################################################
 
 def index():
+    rows = db((db.auth_user.id == db.blog_post.user_id)).select(limitby=(0,4),orderby=~(db.blog_post.time_stamp))
+    postcount = 0
     return locals()
 
 def viewproducts():

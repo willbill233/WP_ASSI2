@@ -1,15 +1,50 @@
 {{extend 'plugin_layouts/layouts/Industrial.html'}}
+<div class="container-fluid">
+    <div  class="row">
+    <div id="content" class="col-xs-6">
+        <h1>
+            User Info
+        </h1>
 
-<h1>
-    User Info
-</h1>
+        <ul>
+            <li><b>Admin:</b> <br>email - admin@admins.net   <br>password - password</li>
+            <li><b>Normal User:</b> <br>email - user@users.net   <br>password - password</li>
+            <br><br><br>
+            <li><b>Ben:</b> <br>email - Sir-Amik-Vase@overclocked.net   <br>password - password</li>
+            <li><b>Will:</b> <br>email - will.knight96@hotmail.com   <br>password - password</li>
+            <li><b>Nathan:</b> <br>email - nathan@nathan.com   <br>password - password</li>
+            <li><b>Georgia:</b> <br>email - georgiaisaac@hotmail.co.uk   <br>password - password</li>
+        </ul>
+    </div>
+    <div id="sidebar1" class="col-xs-6">
+        <!--We can make this a live update feed with j-query-->
+        <h3>
+            Latest Reviews
+        </h3>
+        {{for row in rows:}}
+<div class="ReviewPost" style="height:150px;background-color:#f6f6f6;width:100%;border-radius:5px;">
+    <div class="PostContent" style="height:100%;width:100%;padding:4px;">
+        <div class="UserInformation" style="height:100%;width:20%;float:left;text-align: center;">
+           <img src="{{=URL('download',args=row.auth_user.profile_picture)}}" style="height:80px;width:80px;margin:auto;margin-top:5px;"/>
+            <span style="width:90%;">
+                <br>{{=row.blog_post.username}}<br>
+                <i>Posts:</i> {{=postcount}}
+            </span>
+        </div>
+        <div class="PostInformation" style="height:100%;width:80%;float:left;">
+        <!-- Do these still need to have URL links to the reviews page? can we just remove them now? - Ben -->
+            <i>Product:</i> {{=row.blog_post.product}} <br>
+            <i>Title:</i> <a href="{{=URL('showreview',args=row.blog_post.id)}}">{{=row.blog_post.title}}</a><br>
+            <i>Posted on:</i> {{=row.blog_post.time_stamp}}
+            <br>
+            <i>Review:</i> {{=row.blog_post.body}}
+        </div>
+    </div>
+</div>
+<hr>
+{{pass}}
 
-<ul>
-    <li><b>Admin:</b> <br>email - admin@admins.net   <br>password - password</li>
-    <li><b>Normal User:</b> <br>email - user@users.net   <br>password - password</li>
-    <br><br><br>
-    <li><b>Ben:</b> <br>email - Sir-Amik-Vase@overclocked.net   <br>password - password</li>
-    <li><b>Will:</b> <br>email - will.knight96@hotmail.com   <br>password - password</li>
-    <li><b>Nathan:</b> <br>email - Nathan@Nathan.com   <br>password - password</li>
-    <li><b>Georgia:</b> <br>email - georgiaisaac@hotmail.co.uk   <br>password - password</li>
-</ul>
+    </div>
+</div>
+
+</div>
